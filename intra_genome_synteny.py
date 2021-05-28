@@ -1,11 +1,12 @@
 # -*- coding=utf-8 -*-
 # 2020.0804
 # @zlk
-# 鉴定自己和自己共线性基因对
-#python self_self_syn.py ./lajiao/Capsicum_annuum.ASM51225v2.47.gff3.repr.position.sort ./fan_v_lazi/Capsicum_annuum.ASM51225v2.47.gff3.repr.pep_2_Capsicum_annuum.ASM51225v2.47.gff3.repr.pep.out lajiao_self_paralog
+# zhanglk960127@163.com
+# intra_genome syntenic gene pairs 
+
 import sys
 
-file1=open(sys.argv[1],'r')## 按照顺序排列的gene 列表 第一列为gene名，position.sort文件就可以
+file1=open(sys.argv[1],'r')## position.sort
 
 file2=open(sys.argv[2],'r')# self_blast_file
 file3=open(sys.argv[3],'w')
@@ -39,7 +40,7 @@ for line in file2:
             tandem_dict[line_list[0]]=[line_list[1]]
 
 file2.close()
-#检测tandem
+#identify tandem
 tandem_list=[]
 tandem_dict2=tandem_dict.copy()
 for key,value in tandem_dict.items():
@@ -82,7 +83,7 @@ for key,value in homo_dict.items():
             i_index=total_genome.index(i)
         except ValueError:
             continue
-        ###过滤tandem
+        ###filter tandem
         if abs(total_genome.index(i)-total_genome.index(key))<100:
             continue
         elif i in del_tandem:
@@ -99,25 +100,11 @@ for key,value in homo_dict.items():
             # file3.write(key+'\t'+i+'\t'+str(num)+'\n')
             index+=1
 index1=0
-# for key,value in out_dict.items():
-#     big_list=[]
-#     big_num=0
-#     if len(value)==1:
-#         file3.write(key+'\t'+value[0][0]+'\t'+str(value[0][1])+'\n')
-#         index1+=1
-#     else:
-#         for i in value:
-#             if i[1]>big_num:
-#                 big_list=i
-#                 big_num=i[1]
-#         file3.write(key+'\t'+big_list[0]+'\t'+str(big_list[1])+'\n')
-#         index1+=1
+
 out_list=[]
 for  key,value in out_dict.items():
     for i in value:
         if [key,i[0]] not in out_list and [i[0],key] not in out_list:
             file3.write(key+'\t'+i[0]+'\n')
             out_list.append([key,i[0]])
-print(index)
-print(index1)
 
