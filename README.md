@@ -11,7 +11,7 @@ python intra_genome_synteny.py genome.position.sort self_blast_out out_file_name
 ## Bulit virtual-genome
 ### Select a reference genome to be used as the order of the virtual genome.  
 #re1_genome.position.sort: Each line of the file is a Gene ID, arranged in the order in which it appears in reference genome.  
-#target_ref1.syn: The result file of Synorths software, syntenic file of target genome and reference genome, the first column is the target genome gene ID, and the fifth column is the reference genome gene ID.  
+#target_ref1.syn: The result file of SynOrths software, syntenic file of target genome and reference genome, the first column is the target genome gene ID, and the fifth column is the reference genome gene ID.  
 #virtual_genome1.txt : name of output file.    
 ```
 python virtual_genome_gene_order.py re1_genome.position.sort target_ref1.syn virtual_genome1.txt
